@@ -93,11 +93,6 @@ Finally click `start` and after a while you will see your job running.
 </p>
 
 ### Sample Output
-<p align="center">
-    <img src="assets/vv.png">
-</p>
-
-### Sample Output
 
 ```shell
 Turnaround Efficiency Achieved: Flight EK201 landed at DXB and took off within 45 minutes.
