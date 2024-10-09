@@ -2,16 +2,24 @@ Complex Event Time Processing Demo
 -----------------------------------
 This is a demo application, to illustrate **Complex Event Processing (CEP) with Apache Flink on Ververica**
 
+<p align="center">
+    <img src="assets/logo.png">
+</p>
 
-Airline operations are complex and time-sensitive. Monitoring and detecting critical events, such as delays or security threats, are essential to maintaining efficient operations and ensuring passenger safety. The goal is to create a real-time streaming application using Apache Flink that:
 
-- Detects flight delays correlated with adverse weather conditions.
-- Monitors and escalates security incidents (e.g., unattended luggage).
-- Analyzes aircraft turnaround times to optimize ground operations.
+### Background
+Airline operations are complex and time-sensitive. Monitoring and detecting critical events, such as delays or security threats, are essential to maintaining efficient operations and ensuring passenger safety. 
+
+The goal is to create a **real-time streaming application using Apache Flink** that:
+
+- ✅ Detects flight delays correlated with adverse weather conditions.
+- ✅ Monitors and escalates security incidents (e.g., unattended luggage).
+- ✅ Analyzes aircraft turnaround times to optimize ground operations.
 
 With Apache Flink’s CEP library, we define the following patterns:
 
-Weather-Related Flight Delays: This pattern detects delays associated with severe weather. We define it to look for a sequence where a "DELAY" event is followed by a "WEATHER" event within a short time frame.
+### Weather-Related Flight Delays
+This pattern detects delays associated with severe weather. We define it to look for a sequence where a `DELAY` event is followed by a `WEATHER` event within a short time frame.
 ```java
 Pattern<FlightEvent, ?> weatherPattern = Pattern.<FlightEvent>begin("weatherAlert")
                 .where(new IterativeCondition<FlightEvent>() {
@@ -22,7 +30,8 @@ Pattern<FlightEvent, ?> weatherPattern = Pattern.<FlightEvent>begin("weatherAler
                 });
 ```
 
-**Security Incident Escalation:** This pattern monitors security alerts that escalate, such as a sequence where an initial "SECURITY" event is followed by further details indicating a heightened threat (e.g., bomb threat investigation).
+### Security Incident Escalation
+This pattern monitors security alerts that escalate, such as a sequence where an initial `SECURITY` event is followed by further details indicating a heightened threat (e.g., bomb threat investigation).
 ```java
 Pattern.<FlightEvent>begin("securityAlert")
                 .where(new IterativeCondition<FlightEvent>() {
@@ -33,7 +42,8 @@ Pattern.<FlightEvent>begin("securityAlert")
                 });
 ```
 
-**Turnaround Efficiency:** This pattern tracks if an aircraft departs within a 45-minute window after landing. This helps evaluate how efficiently the airline handles aircraft turnaround.
+### Turnaround Efficiency
+This pattern tracks if an aircraft departs within a 45-minute window after landing. This helps evaluate how efficiently the airline handles aircraft turnaround.
 ```java
 Pattern<FlightEvent, ?> turnaroundPattern = Pattern.<FlightEvent>begin("arrival")
                 .where(new IterativeCondition<FlightEvent>() {
@@ -55,8 +65,7 @@ Pattern<FlightEvent, ?> turnaroundPattern = Pattern.<FlightEvent>begin("arrival"
                 });
 ```
 
-When these patterns are detected, Flink generates alerts using the PatternSelectFunction
-
+When these patterns are detected, Flink generates alerts using the **PatternSelectFunction**
 ```java
 securityPatternStream.select((PatternSelectFunction<FlightEvent, String>) pattern -> {
     FlightEvent securityEvent = pattern.get("securityAlert").get(0);
@@ -65,7 +74,8 @@ securityPatternStream.select((PatternSelectFunction<FlightEvent, String>) patter
 }).name("SecurityPattern").uid("SecurityPattern");
 ```
 
-#### Sample Output
+### Sample Output
+
 ```shell
 Turnaround Efficiency Achieved: Flight EK201 landed at DXB and took off within 45 minutes.
 Security Alert: Incident detected at LAX for Flight EK201 - Suspicious activity
