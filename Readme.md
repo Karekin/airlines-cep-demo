@@ -75,6 +75,7 @@ securityPatternStream.select((PatternSelectFunction<FlightEvent, String>) patter
 ```
 
 ### Sample Output
+
 ```shell
 Turnaround Efficiency Achieved: Flight EK201 landed at DXB and took off within 45 minutes.
 Security Alert: Incident detected at LAX for Flight EK201 - Suspicious activity
