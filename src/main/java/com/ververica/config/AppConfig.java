@@ -7,7 +7,7 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import java.util.Properties;
 
 public class AppConfig {
-    public static final String BOOTSTRAP_URL = "cs351riqdl1gtoe02pl0.any.eu-central-1.mpx.prd.cloud.redpanda.com:9092";
+    public static final String BOOTSTRAP_URL = "";
 
     public static final String FLIGHTEVENTS_TOPIC = "flightevents";
 
@@ -24,7 +24,7 @@ public class AppConfig {
     public static Properties buildSecurityProps(Properties properties) {
         properties.put("security.protocol", "SASL_SSL");
         properties.put("sasl.mechanism", "SCRAM-SHA-256");
-        properties.put("sasl.jaas.config", "org.apache.kafka.common.security.scram.ScramLoginModule required username=myuser password=testpwd;");
+        properties.put("sasl.jaas.config", "org.apache.kafka.common.security.scram.ScramLoginModule required username= password=;");
 
         return properties;
     }
