@@ -73,6 +73,29 @@ securityPatternStream.select((PatternSelectFunction<FlightEvent, String>) patter
             " - " + securityEvent.getDetails();
 }).name("SecurityPattern").uid("SecurityPattern");
 ```
+### Deployment
+Run `mvn clean package` to create a jar file
+
+
+On the `Artifacts` tab upload the generated jar file
+<p align="center">
+    <img src="assets/artifacts.png">
+</p>
+
+Then navigate to the `Deployments` tab, click `new deployment` and put the required fields.
+<p align="center">
+    <img src="assets/deployment.png">
+</p>
+
+Finally click `start` and after a while you will see your job running.
+<p align="center">
+    <img src="assets/vv.png">
+</p>
+
+### Sample Output
+<p align="center">
+    <img src="assets/vv.png">
+</p>
 
 ### Sample Output
 
