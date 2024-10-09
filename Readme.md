@@ -1,4 +1,4 @@
-Complex Event Time Processing Demo
+Complex Event Processing (CEP) Demo
 -----------------------------------
 This is a demo application, to illustrate **Complex Event Processing (CEP) with Apache Flink on Ververica**
 
