@@ -98,7 +98,7 @@ public class FlightCEPRunner {
             FlightEvent securityEvent = pattern.get("securityAlert").get(0);
             return "Security Alert: Incident detected at " + securityEvent.getAirportCode() + " for Flight " + securityEvent.getFlightId() +
                     " - " + securityEvent.getDetails();
-        }).name("SecurityPattern").uid("SecurityPattern");
+        }).name("SecurityAlertsPattern").uid("SecurityAlertsPattern");
 
         DataStream<String> weatherAlerts = weatherPatternStream.select(new PatternSelectFunction<FlightEvent, String>() {
             @Override
@@ -106,7 +106,7 @@ public class FlightCEPRunner {
                 FlightEvent weatherEvent = pattern.get("weatherAlert").get(0);
                 return "Weather Alert: Severe weather condition at " + weatherEvent.getAirportCode() + " - " + weatherEvent.getDetails();
             }
-        }).name("WeatherPattern").uid("WeatherPattern");
+        }).name("WeatherAlertsPattern").uid("WeatherAlertsPattern");
 
         DataStream<String> turnaroundAlerts = patternStream.select(new PatternSelectFunction<FlightEvent, String>() {
             @Override
@@ -114,7 +114,7 @@ public class FlightCEPRunner {
                 FlightEvent arrival = pattern.get("arrival").get(0);
                 FlightEvent departure = pattern.get("departure").get(0);
                 return "Turnaround Efficiency Achieved: Flight " + arrival.getFlightId() +
-                        " landed at " + arrival.getAirportCode() + " and took off within 45 minutes.";
+                        " landed at " + arrival.getAirportCode() + " and took off for " + departure.getAirportCode() + " within 45 minutes.";
             }
         }).name("TurnaroundAlertsPattern").uid("TurnaroundAlertsPattern");
 
