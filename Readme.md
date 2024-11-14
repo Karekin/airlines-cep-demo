@@ -31,7 +31,7 @@ Pattern<FlightEvent, ?> weatherPattern = Pattern.<FlightEvent>begin("weatherAler
 ```
 
 ### Security Incident Escalation
-This pattern monitors security alerts that escalate, such as a sequence where an initial `SECURITY` event is followed by further details indicating a heightened threat (e.g., bomb threat investigation).
+This pattern monitors security alerts that escalate, such as a sequence where an initial `SECURITY` event is followed by further details indicating a heightened threat (e.g., suspicious activities or threat investigations).
 ```java
 Pattern.<FlightEvent>begin("securityAlert")
                 .where(new IterativeCondition<FlightEvent>() {
