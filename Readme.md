@@ -1,7 +1,9 @@
 Complex Event Processing (CEP) Demo
 -----------------------------------
-This is a demo application, to illustrate **Complex Event Processing (CEP) with Apache Flink on Ververica**
-You can also check this blog post [here](https://www.ververica.com/blog/real-time-insights-for-airlines-with-complex-event-processing).
+This is a demo application, to illustrate **Complex Event Processing (CEP) with Apache Flink on Ververica.**
+
+
+You can also check [this blog post](https://www.ververica.com/blog/real-time-insights-for-airlines-with-complex-event-processing).
 
 <p align="center">
     <img src="assets/logo.png">
