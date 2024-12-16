@@ -19,15 +19,62 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import static com.ververica.config.AppConfig.buildProducerProps;
 import static com.ververica.config.AppConfig.buildSecurityProps;
 
+/**
+ * Weather Alert: Severe weather condition at DXB - Sandstorm approaching
+ * Weather Alert: Severe weather condition at DXB - Sandstorm approaching
+ * Weather Alert: Severe weather condition at JFK - Snowstorm expected
+ * Weather Alert: Severe weather condition at LAX - Sandstorm approaching
+ * Weather Alert: Severe weather condition at JFK - Snowstorm expected
+ * Weather Alert: Severe weather condition at LAX - Heavy storm warning
+ * Weather Alert: Severe weather condition at LHR - Snowstorm expected
+ * Weather Alert: Severe weather condition at LAX - Heavy storm warning
+ * Weather Alert: Severe weather condition at DXB - Snowstorm expected
+ * Weather Alert: Severe weather condition at DXB - Snowstorm expected
+ * Weather Alert: Severe weather condition at DXB - Snowstorm expected
+ * Weather Alert: Severe weather condition at LAX - Sandstorm approaching
+ * Weather Alert: Severe weather condition at DXB - Sandstorm approaching
+ * Weather Alert: Severe weather condition at LAX - Heavy storm warning
+ * Weather Alert: Severe weather condition at LAX - Sandstorm approaching
+ * Weather Alert: Severe weather condition at JFK - Snowstorm expected
+ * Weather Alert: Severe weather condition at JFK - Heavy storm warning
+ * Security Alert: Incident detected at LAX for Flight EK209 - Unattended luggage
+ * Security Alert: Incident detected at LAX for Flight EK206 - Unattended luggage
+ * Security Alert: Incident detected at DXB for Flight EK203 - Suspicious activity
+ * Security Alert: Incident detected at JFK for Flight EK202 - Suspicious activity
+ * Security Alert: Incident detected at LHR for Flight EK209 - Bomb threat investigation
+ * Security Alert: Incident detected at DXB for Flight EK203 - Unattended luggage
+ * Security Alert: Incident detected at DXB for Flight EK207 - Suspicious activity
+ * Security Alert: Incident detected at DXB for Flight EK206 - Bomb threat investigation
+ * Security Alert: Incident detected at LHR for Flight EK205 - Suspicious activity
+ * Security Alert: Incident detected at DXB for Flight EK205 - Bomb threat investigation
+ * Security Alert: Incident detected at LHR for Flight EK207 - Bomb threat investigation
+ * Security Alert: Incident detected at LAX for Flight EK202 - Bomb threat investigation
+ * Security Alert: Incident detected at JFK for Flight EK209 - Suspicious activity
+ * Security Alert: Incident detected at LAX for Flight EK208 - Suspicious activity
+ * Security Alert: Incident detected at LHR for Flight EK202 - Suspicious activity
+ * Security Alert: Incident detected at JFK for Flight EK203 - Bomb threat investigation
+ * Security Alert: Incident detected at JFK for Flight EK210 - Unattended luggage
+ * Security Alert: Incident detected at JFK for Flight EK210 - Suspicious activity
+ * Security Alert: Incident detected at LHR for Flight EK209 - Unattended luggage
+ * Security Alert: Incident detected at LAX for Flight EK207 - Bomb threat investigation
+ * Security Alert: Incident detected at LHR for Flight EK205 - Suspicious activity
+ * Security Alert: Incident detected at DXB for Flight EK210 - Unattended luggage
+ * Security Alert: Incident detected at JFK for Flight EK204 - Suspicious activity
+ * Security Alert: Incident detected at LHR for Flight EK210 - Suspicious activity
+ * Security Alert: Incident detected at DXB for Flight EK300 - Unattended luggage
+ * Turnaround Efficiency Achieved: Flight EK201 landed at DXB and took off for DXB within 45 minutes.
+ * Turnaround Efficiency Achieved: Flight EK201 landed at DXB and took off for DXB within 45 minutes.
+ */
 public class FlightCEPRunner {
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
         environment.setParallelism(1);
 
-        var properties = buildSecurityProps(new Properties());
+        Properties properties = buildProducerProps();
 
         // 1 Create Kafka/Flink Consumer
         KafkaSource<FlightEvent> flightEventKafkaSource = KafkaSource.<FlightEvent>builder()
